@@ -18,12 +18,12 @@ function Pagination({ updatePage, currentPage, totalPages }) {
 
   return (
     <div className={styles.paginationMain}>
-      <button onClick={handlePrev} disabled={currentPage == 1}>
-        <IoMdArrowRoundBack />
+      <button className={styles.btn} onClick={handlePrev} disabled={currentPage == 1}>
+      Previous
       </button>
       <div className={styles.page} ><p  >{currentPage}</p></div>
-      <button onClick={handleNext} disabled={currentPage == totalPages}>
-        <IoMdArrowRoundForward />
+      <button  className={styles.btn} onClick={handleNext} disabled={currentPage == totalPages}>
+      Next
       </button>
     </div>
   );

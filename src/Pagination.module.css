@@ -14,12 +14,15 @@
     align-items: center;
   }
   .paginationMain button {
-    background: linear-gradient(0deg, #f1f1f1, #f1f1f1),
+    /* background: linear-gradient(0deg, #f1f1f1, #f1f1f1),
       linear-gradient(0deg, #f1f1f1, #f1f1f1),
       linear-gradient(0deg, #f1f1f1, #f1f1f1),
-      linear-gradient(0deg, #f1f1f1, #f1f1f1);
+      linear-gradient(0deg, #f1f1f1, #f1f1f1); */
     border: none;
     box-shadow: 0px 4px 4px 0px #00000040;
     border-radius: 15px;
+  }
+  .btn{
+    background-color:#4ee44e ;
   }
   
