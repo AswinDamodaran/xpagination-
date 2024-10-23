@@ -1,23 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+
+import "./App.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Pagination from "./Pagination";
 
 function App() {
+  const [employees, setEmployees] = useState([]);
+  const [currentpage, setCurrentpage] = useState(1);
+  const employeelimit = 10;
+
+  const idxLast = currentpage * employeelimit;
+  const idxFirst = idxLast - employeelimit;
+  const currentEmployee = employees.slice(idxFirst, idxLast);
+  const updatePage = (newPage) => setCurrentpage(newPage);
+  const totalPages = Math.ceil(employees.length / employeelimit);
+
+  const getData = async () => {
+    try {
+      const res = await axios.get(
+        "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
+      );
+      setEmployees(res.data);
+    } catch (e) {
+      alert("could not fetch data", e);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Employee Data Table</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Emai</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentEmployee.map((employee) => (
+            <tr key={employee.id} >
+              <td>{employee.id}</td>
+              <td>{employee.name}</td>
+              <td>{employee.email}</td>
+              <td>{employee.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <Pagination 
+      updatePage={updatePage}
+      currentPage={currentpage}
+      totalPages={totalPages}
+       />
     </div>
   );
 }
