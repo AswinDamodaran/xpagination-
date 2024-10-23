@@ -22,7 +22,7 @@ function App() {
       );
       setEmployees(res.data);
     } catch (e) {
-      alert("could not fetch data", e);
+      alert("failed to fetch data", e);
     }
   };
 
